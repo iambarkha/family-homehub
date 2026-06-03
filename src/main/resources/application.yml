@@ -2,7 +2,7 @@ spring:
   application:
     name: homehub
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:mem:homehub
     driver-class-name: org.h2.Driver
     username: sa
     password:
@@ -10,9 +10,12 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  h2:
+    console:
+      enabled: true
 
 server:
-  port: 8081
+  port: 8082
 
 logging:
   level:

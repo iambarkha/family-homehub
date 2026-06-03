@@ -30,7 +30,7 @@ public class AuthServiceImpl implements AuthService {
     private final JwtService jwtService;
 
     @Override
-    public ApiResponse<AuthResponse> register(RegisterRequest registerRequest) {
+    public AuthResponse register(RegisterRequest registerRequest) {
         if(userRepository.existsByEmail(registerRequest.email())) {
             throw new UserAlreadyExistsException(("Email already registered: " + registerRequest.email()));
         }
@@ -39,28 +39,24 @@ public class AuthServiceImpl implements AuthService {
         user.setPassword(passwordEncoder.encode(registerRequest.password()));
 
         User savedUser = userRepository.save(user);
-
-       AuthResponse response =  new AuthResponse( jwtService.generateToken(savedUser),
-               "Bearer", 86400L, userMapper.toUserResponse(savedUser));
-
-        return ApiResponse.success("User registered successfully", response);
+        return AuthResponse.of(jwtService.generateToken(savedUser)
+        , jwtService.getExpirationMs(), userMapper.toUserResponse(savedUser));
     }
 
     @Override
-    public ApiResponse<AuthResponse> login(LoginRequest loginRequest) {
+    public AuthResponse login(LoginRequest loginRequest) {
         User user = userRepository.findByEmail(loginRequest.email())
                 .orElse(null);
 
         if (user == null || !passwordEncoder.matches(loginRequest.password(), user.getPassword())) {
             throw new InvalidCredentialsException("Invalid email or password");
         }
-        AuthResponse authResponse = new AuthResponse(
+
+        return AuthResponse.of(
                 jwtService.generateToken(user),
-                "Bearer",
-                86400L,
+                jwtService.getExpirationMs(),
                 userMapper.toUserResponse(user)
         );
-        return ApiResponse.success("User registered successfully", authResponse);
 
     }
 

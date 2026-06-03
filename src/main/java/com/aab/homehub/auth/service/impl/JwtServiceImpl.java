@@ -26,6 +26,7 @@ public class JwtServiceImpl implements JwtService {
 
     @Override
     public String extractUsername(String token) {
+        if (token == null || token.isBlank()) return null;
         return extractClaim(token, Claims::getSubject);
     }
 
@@ -44,7 +45,7 @@ public class JwtServiceImpl implements JwtService {
 
 
     private SecretKey getSigningKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
+        byte[] keyBytes = Decoders.BASE64.decode(secretKey.trim()); // ← add .trim()
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
@@ -83,4 +84,8 @@ public class JwtServiceImpl implements JwtService {
                 .getPayload();
     }
 
+    @Override
+    public long getExpirationMs() {
+        return jwtExpiration;
+    }
     }
