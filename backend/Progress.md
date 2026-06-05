@@ -998,3 +998,11 @@ export default client;
 #                      then chat assistant
 # 12. frontend       → React pages module by module
 # 13. deploy         → Railway + Vercel + swap to Upstash Kafka
+
+
+## Completed
+- [x] auth — JWT login working
+- [x] family — CRUD working, tested via Postman
+
+## Current
+- [ ] todo package

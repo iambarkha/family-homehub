@@ -1,5 +1,6 @@
 package com.aab.homehub.auth.entity;
 
+import com.aab.homehub.family.FamilyGroup;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -66,6 +67,9 @@ public class User implements UserDetails {
         updatedAt = LocalDateTime.now();
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "family_group_id")
+    private FamilyGroup familyGroup;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

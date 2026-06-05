@@ -28,4 +28,8 @@ public interface UserRepository extends JpaRepository<User, UUID> , JpaSpecifica
 
     // Pageable example (derived + pagination)
     Page<User> findByRole(Role role, Pageable pageable);
+
+
+  /*  @Transactional
+    int deleteByIdAndFamilyGroup_Id(String userId, String familyId);*/
 }

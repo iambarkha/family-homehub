@@ -24,4 +24,5 @@ public interface UserService {
     UserResponse getCurrentUser();
 
     UserResponse updateCurrentUser(UserResponse userResponse);
+
 }
