@@ -208,16 +208,16 @@ public class MealPlan extends BaseEntity {
 @Entity @Table(name = "todo_items")
 @Data @NoArgsConstructor @Builder
 public class TodoItem extends BaseEntity {
-    @Id @GeneratedValue(strategy = GenerationType.UUID) private String id;
-    @Column(nullable = false) private String title;
-    private String description;
-    @Enumerated(EnumType.STRING) private Priority priority;  // HIGH, MEDIUM, LOW
-    @Enumerated(EnumType.STRING) private TodoScope scope;    // WEEKLY, MONTHLY, LONGTERM
-    private LocalDate dueDate;
-    private boolean completed;
-    @ManyToOne(fetch = FetchType.LAZY) private User assignedTo;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "family_group_id") private FamilyGroup familyGroup;
+        @Id @GeneratedValue(strategy = GenerationType.UUID) private String id;
+        @Column(nullable = false) private String title;
+        private String description;
+        @Enumerated(EnumType.STRING) private Priority priority;  // HIGH, MEDIUM, LOW
+        @Enumerated(EnumType.STRING) private TodoScope scope;    // WEEKLY, MONTHLY, LONGTERM
+        private LocalDate dueDate;
+        private boolean completed;
+        @ManyToOne(fetch = FetchType.LAZY) private User assignedTo;
+        @ManyToOne(fetch = FetchType.LAZY)
+        @JoinColumn(name = "family_group_id") private FamilyGroup familyGroup;
 }
 ```
 
@@ -820,7 +820,7 @@ CREATE TABLE meal_plans (
 );
 ```
 
-# V3__create_todos.sql
+# V1_create_todos.sql
 ```sql
 CREATE TABLE todo_items (
     id VARCHAR(36) PRIMARY KEY, title VARCHAR(255) NOT NULL, description TEXT,
@@ -1002,7 +1002,8 @@ export default client;
 
 ## Completed
 - [x] auth — JWT login working
-- [x] family — CRUD working, tested via Postman
+- [x] family — CRUD working
+- [x] todo — CRUD + priority + scope working, Postman tested
 
 ## Current
-- [ ] todo package
+- [ ] meal package

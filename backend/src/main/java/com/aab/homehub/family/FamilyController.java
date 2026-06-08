@@ -1,5 +1,7 @@
 package com.aab.homehub.family;
 
+import com.aab.homehub.family.dto.FamilyRequest;
+import com.aab.homehub.family.dto.FamilyResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +22,7 @@ public class FamilyController {
     public ResponseEntity<FamilyResponse> createFamily(@PathVariable String familyName, @PathVariable String userId) {
 */
     @PostMapping
-   // @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<FamilyResponse> createFamily(@Valid @RequestBody FamilyRequest familyRequest) {
 
         FamilyResponse familyResponse = familyService.createFamily(familyRequest.name(),familyRequest.creatorUserId());
@@ -28,7 +30,7 @@ public class FamilyController {
         return ResponseEntity.status(HttpStatus.CREATED).body(familyResponse);
     }
     @DeleteMapping("/families/{familyId}/users/{userId}")
-   // @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> removeFamily(@PathVariable String familyId, @PathVariable String userId) {
 
         boolean deleted = familyService.removeFamily(familyId, userId);
@@ -44,7 +46,7 @@ public class FamilyController {
     }
 
     @PostMapping("/addMember/families/{familyId}/email/{email}")
-  //  @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<FamilyResponse> addMemberByEmail(@PathVariable String familyId, @PathVariable String email) {
         FamilyResponse familyResponse = familyService.addMemberByEmail(familyId, email);
         return ResponseEntity.ok(familyResponse);

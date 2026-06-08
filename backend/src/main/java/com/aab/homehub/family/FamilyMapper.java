@@ -1,6 +1,7 @@
 package com.aab.homehub.family;
 
 import com.aab.homehub.auth.entity.User;
+import com.aab.homehub.family.dto.FamilyResponse;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

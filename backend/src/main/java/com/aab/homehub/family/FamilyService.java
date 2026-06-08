@@ -3,6 +3,7 @@ package com.aab.homehub.family;
 import com.aab.homehub.auth.UserRepository;
 import com.aab.homehub.auth.entity.User;
 import com.aab.homehub.exception.ResourceNotFoundException;
+import com.aab.homehub.family.dto.FamilyResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -249,7 +249,7 @@ CREATE TABLE meal_plans (
 );
 ```
 
-# V3__create_todos.sql
+# V1_create_todos.sql
 ```sql
 CREATE TABLE todo_items (
     id VARCHAR(36) PRIMARY KEY,

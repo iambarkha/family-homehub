@@ -1,6 +1,4 @@
-package com.aab.homehub.family;
-
-import com.aab.homehub.auth.entity.User;
+package com.aab.homehub.family.dto;
 
 import java.util.List;
 
