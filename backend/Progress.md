@@ -304,7 +304,7 @@ public class AiService {
 
     // ─────────────────────────────────────────────
     // AI FEATURE 1: Weekly meal suggestions
-    // Observes past meals + cuisine preference
+    // Observes past meals + cuisineType preference
     // ─────────────────────────────────────────────
     public String suggestWeeklyMeals(String familyGroupId, String cuisinePreference) {
         // fetch last 4 weeks of meals as context
@@ -323,7 +323,7 @@ public class AiService {
 
             Suggest a 7-day meal plan (breakfast, lunch, dinner) that:
             1. Avoids repeating meals from the last 2 weeks
-            2. Matches the cuisine preference where possible
+            2. Matches the cuisineType preference where possible
             3. Is balanced and nutritious
             4. Includes estimated calories and protein per meal
 
@@ -1003,7 +1003,8 @@ export default client;
 ## Completed
 - [x] auth — JWT login working
 - [x] family — CRUD working
-- [x] todo — CRUD + priority + scope working, Postman tested
+- [x] todo — CRUD + priority + scope working
+- [x] meal — Multi dish slots, both delete options, Postman tested
 
 ## Current
-- [ ] meal package
+- [ ] shopping package
