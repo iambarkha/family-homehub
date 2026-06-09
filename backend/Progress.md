@@ -999,12 +999,12 @@ export default client;
 # 12. frontend       → React pages module by module
 # 13. deploy         → Railway + Vercel + swap to Upstash Kafka
 
-
 ## Completed
 - [x] auth — JWT login working
 - [x] family — CRUD working
 - [x] todo — CRUD + priority + scope working
-- [x] meal — Multi dish slots, both delete options, Postman tested
+- [x] meal — multi-dish slots, both delete options, Postman tested
+- [x] shopping — grouped by category, batch add, clear purchased, Postman tested
 
 ## Current
-- [ ] shopping package
+- [ ] reminder package
