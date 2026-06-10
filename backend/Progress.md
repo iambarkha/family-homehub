@@ -1005,6 +1005,7 @@ export default client;
 - [x] todo — CRUD + priority + scope working
 - [x] meal — multi-dish slots, both delete options, Postman tested
 - [x] shopping — grouped by category, batch add, clear purchased, Postman tested
+- [x] reminder — CRUD, scheduler, recurrence, Postman tested
 
 ## Current
-- [ ] reminder package
+- [ ] pantry package

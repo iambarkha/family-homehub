@@ -17,7 +17,6 @@ spring:
     host: localhost
     port: 1025   # fake SMTP port — just logs, never sends
 
-
 server:
   port: 8082
 
@@ -32,4 +31,3 @@ logging:
 jwt:
   secret: ${JWT_SECRET}
   expiration: 3600000
-
