@@ -1000,12 +1000,13 @@ export default client;
 # 13. deploy         → Railway + Vercel + swap to Upstash Kafka
 
 ## Completed
-- [x] auth — JWT login working
-- [x] family — CRUD working
-- [x] todo — CRUD + priority + scope working
-- [x] meal — multi-dish slots, both delete options, Postman tested
-- [x] shopping — grouped by category, batch add, clear purchased, Postman tested
-- [x] reminder — CRUD, scheduler, recurrence, Postman tested
+- [x] auth
+- [x] family
+- [x] todo
+- [x] meal
+- [x] shopping
+- [x] reminder
+- [x] pantry
 
 ## Current
-- [ ] pantry package
+- [ ] nutrition package

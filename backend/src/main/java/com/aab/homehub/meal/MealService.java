@@ -120,4 +120,5 @@ public class MealService {
         mealRepo.deleteByFamilyGroupIdAndDateAndSlot(
                 familyGroup.getId(), date, slot);
     }
+
 }
