@@ -2,8 +2,6 @@ package com.aab.homehub.reminder;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -17,13 +15,14 @@ public class ReminderScheduler {
 
     private final ReminderRepository reminderRepository;
     private final ReminderService reminderService;
-    private final JavaMailSender mailSender;
+    //private final JavaMailSender mailSender;
+    private final ReminderEventProducer reminderEventProducer;
+
 
     // runs every 60 seconds
     @Scheduled(fixedDelay = 60_000)
     public void processDueReminders() {
-        List<Reminder> due = reminderRepository
-                .findBySentFalseAndTriggerAtBefore(LocalDateTime.now());
+        List<Reminder> due = reminderRepository.findDueReminders(LocalDateTime.now());
 
         if (due.isEmpty()) return;
 
@@ -31,29 +30,23 @@ public class ReminderScheduler {
 
         due.forEach(reminder -> {
             try {
-                sendEmail(reminder);
+                // publish to Kafka instead of sending email directly
+                reminderEventProducer.publishReminderTriggered(
+                        new ReminderTriggeredEvent(
+                                reminder.getId().toString(),
+                                reminder.getFamilyGroup().getId().toString(),
+                                reminder.getAssignedTo().getEmail(),
+                                reminder.getTitle(),
+                                reminder.getMessage()
+                        )
+                );
+                // mark as sent + handle recurrence
                 reminderService.processReminder(reminder);
+
             } catch (Exception e) {
                 log.error("Failed to process reminder {}: {}",
                         reminder.getId(), e.getMessage());
             }
         });
-    }
-
-    private void sendEmail(Reminder reminder) {
-        try {
-            SimpleMailMessage msg = new SimpleMailMessage();
-            msg.setTo(reminder.getAssignedTo().getEmail());
-            msg.setSubject("Reminder: " + reminder.getTitle());
-            msg.setText(reminder.getMessage() != null
-                    ? reminder.getMessage()
-                    : reminder.getTitle());
-            mailSender.send(msg);
-            log.info("Email sent to {} for reminder: {}",
-                    reminder.getAssignedTo().getEmail(), reminder.getTitle());
-        } catch (Exception e) {
-            log.error("Failed to send email for reminder {}: {}",
-                    reminder.getId(), e.getMessage());
-        }
     }
 }

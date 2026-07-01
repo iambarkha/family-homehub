@@ -44,10 +44,20 @@ public class JwtServiceImpl implements JwtService {
 
 
 
-    private SecretKey getSigningKey() {
+  /*  private SecretKey getSigningKey() {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey.trim()); // ← add .trim()
+        System.out.println("JWT_SECRET=[" + secretKey + "]");
+        System.out.println("Length=" + secretKey.length());
         return Keys.hmacShaKeyFor(keyBytes);
-    }
+    }*/
+  private SecretKey getSigningKey() {
+      String normalized = secretKey
+              .replaceAll("\\s+", "");
+
+      byte[] keyBytes = Decoders.BASE64.decode(normalized);
+
+      return Keys.hmacShaKeyFor(keyBytes);
+  }
 
     @Override
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {

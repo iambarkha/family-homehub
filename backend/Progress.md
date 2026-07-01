@@ -1008,7 +1008,8 @@ export default client;
 - [x] reminder
 - [x] pantry
 - [x] nutrition
-- [x] repo structure fixed — backend/ clean on GitHub
+- [x] Kafka setup — 6 topics created
+- [x] kafka: reminder.triggered — scheduler → producer → consumer
 
 ## Current
-- [ ] Kafka setup
+- [ ] kafka: todo.completed
